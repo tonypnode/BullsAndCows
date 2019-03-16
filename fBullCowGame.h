@@ -14,10 +14,10 @@ class fBullCowGame {
 public:
     void Reset();
     int GetMaxTries();
-    int CurrentTry();
     bool IsGameWon();
     bool CheckGuessValid(std::string);
 
 private:
-
+    int MaxTries = 5;
+    int TotalTries = 0;
 };
