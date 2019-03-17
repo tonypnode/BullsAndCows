@@ -16,14 +16,14 @@ void fBullCowGame::Reset() {
 
 int fBullCowGame::GetMaxTries() const { return MaxTries; }
 int fBullCowGame::GetCurrentTry() const { return CurrentTry; }
-
+void fBullCowGame::IncrementCurrentTry() { CurrentTry += 1; }
 
 bool fBullCowGame::IsGameWon() {
     return true;
 }
 
-void PrintCurrentStats(int TryNumber){
-    std::cout << "Try " << TryNumber +1 << " of " << Game.GetMaxTries() << std::endl;
+void fBullCowGame::PrintCurrentStats(){
+    std::cout << "Try " << GetCurrentTry() << " of " << GetMaxTries() << std::endl;
 }
 
 

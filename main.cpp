@@ -7,9 +7,6 @@ void DisplayGuess(std::string Guess);
 bool AskToPlayAgain();
 void ThankYouGoodBye();
 void PlayGame();
-void PrintCurrentStats(int);
-
-
 
 int main() {
     PlayGame();
@@ -46,10 +43,12 @@ void PlayGame() {
     PrintIntro();
     fBullCowGame Game;
     do {
+        Game.Reset();
         for (int i = 0; i < Game.GetMaxTries(); i++) {
-            PrintCurrentStats(i);
+            Game.PrintCurrentStats();
             std::string RoundGuess = GetPlayerGuess();
             DisplayGuess(RoundGuess);
+            Game.IncrementCurrentTry();
         }
     } while (AskToPlayAgain());
 }
@@ -67,11 +66,6 @@ bool AskToPlayAgain() {
     } else {
         AskToPlayAgain();
     }
-}
-
-void PrintCurrentStats(int TryNumber){
-    //Need to add 1 to param because starts with 0
-    std::cout << "Try " << TryNumber +1 << " of " << Game.GetMaxTries() << std::endl;
 }
 
 void ThankYouGoodBye(){

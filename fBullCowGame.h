@@ -15,7 +15,9 @@ public:
     fBullCowGame(); // Constructor
     int GetCurrentTry() const;
     int GetMaxTries() const;
+    void IncrementCurrentTry();
     void Reset();
+    void PrintCurrentStats();
     bool IsGameWon();
     bool CheckGuessValid(std::string);
 
