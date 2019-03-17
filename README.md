@@ -31,3 +31,8 @@ to play again.
 before selecting it
 
 
+### Wants
+* Enter Username
+* Track High Score across games (file)
+* Track Hight Score across games (database)
+
