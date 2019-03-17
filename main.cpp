@@ -13,14 +13,12 @@ using int32 = int;
 
 void PrintIntro();
 FText GetPlayerGuess();
-void DisplayGuess(FText Guess);
 bool AskToPlayAgain();
 void ThankYouGoodBye();
 void PlayGame();
 
 int32 main() {
     PlayGame();
-    ThankYouGoodBye();
     return 0;
 }
 
@@ -42,12 +40,6 @@ FText GetPlayerGuess() {
 
 }
 
-void DisplayGuess(FText Guess) {
-
-   std::cout << "Your Guess was: " << Guess << std::endl;
-
-}
-
 void PlayGame() {
     PrintIntro();
     fBullCowGame Game;
@@ -56,8 +48,9 @@ void PlayGame() {
         for (int32 i = 0; i < Game.GetMaxTries(); i++) {
             Game.PrintCurrentStats();
             FText RoundGuess = GetPlayerGuess();
-            DisplayGuess(RoundGuess);
-            Game.IncrementCurrentTry();
+            fBullCowCount BullCowCount = Game.SubmitGuess(RoundGuess);
+            std::cout << "Bulls = " << BullCowCount.Bulls << std::endl;
+            std::cout << "Cows = " << BullCowCount.Cows << std::endl;
         }
     } while (AskToPlayAgain());
 }
@@ -68,12 +61,20 @@ bool AskToPlayAgain() {
 
     std::getline(std::cin, Answer);
 
+
     if(Answer == "y") {
+
         return true;
+
     } else if(Answer == "n") {
+        ThankYouGoodBye();
+
         return false;
+
     } else {
+        //TODO: Fix this, not restarting the PlayGame() loop after answering non 'y' or 'n' then answering 'y'.
         AskToPlayAgain();
+
     }
 }
 
