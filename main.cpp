@@ -1,30 +1,39 @@
+/*
+
+This is the console executable, that makes use of the BullCow Class
+THis acts as the view in a MVC patter and is responsible for all user interaction.
+For game logic see the fBullCowGame class.
+
+*/
 #include <iostream>
 #include "fBullCowGame.h"
 
+using FText = std::string;
+using int32 = int;
+
 void PrintIntro();
-std::string GetPlayerGuess();
-void DisplayGuess(std::string Guess);
+FText GetPlayerGuess();
+void DisplayGuess(FText Guess);
 bool AskToPlayAgain();
 void ThankYouGoodBye();
 void PlayGame();
 
-int main() {
+int32 main() {
     PlayGame();
     ThankYouGoodBye();
     return 0;
 }
 
-
 void PrintIntro() {
-   constexpr int WORD_LENGTH = 5;
+   constexpr int32 WORD_LENGTH = 5;
 
    std::cout << "Welcome to Bulls and Cows.\n\n";
    std::cout << "Guess the " << WORD_LENGTH << " Letter isogram\n";
 
 }
 
-std::string GetPlayerGuess() {
-   std::string Guess;
+FText GetPlayerGuess() {
+   FText Guess;
 
    std::cout << "Enter Guess: \n";
    std::getline(std::cin, Guess);
@@ -33,7 +42,7 @@ std::string GetPlayerGuess() {
 
 }
 
-void DisplayGuess(std::string Guess) {
+void DisplayGuess(FText Guess) {
 
    std::cout << "Your Guess was: " << Guess << std::endl;
 
@@ -44,9 +53,9 @@ void PlayGame() {
     fBullCowGame Game;
     do {
         Game.Reset();
-        for (int i = 0; i < Game.GetMaxTries(); i++) {
+        for (int32 i = 0; i < Game.GetMaxTries(); i++) {
             Game.PrintCurrentStats();
-            std::string RoundGuess = GetPlayerGuess();
+            FText RoundGuess = GetPlayerGuess();
             DisplayGuess(RoundGuess);
             Game.IncrementCurrentTry();
         }
@@ -55,7 +64,7 @@ void PlayGame() {
 
 bool AskToPlayAgain() {
     std::cout << "Would You Like to Play Again y/n?\n";
-    std::string Answer;
+    FText Answer;
 
     std::getline(std::cin, Answer);
 

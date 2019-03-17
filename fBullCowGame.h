@@ -5,6 +5,9 @@
 
 #include <string>
 
+using int32 = int;
+using FString = std::string;
+
 #ifndef BULLSANDCOWS_FBULLCOWGAME_H
 #define BULLSANDCOWS_FBULLCOWGAME_H
 
@@ -13,17 +16,17 @@
 class fBullCowGame {
 public:
     fBullCowGame(); // Constructor
-    int GetCurrentTry() const;
-    int GetMaxTries() const;
+    int32 GetCurrentTry() const;
+    int32 GetMaxTries() const;
     void IncrementCurrentTry();
     void Reset();
     void PrintCurrentStats();
     bool IsGameWon();
-    bool CheckGuessValid(std::string);
+    bool CheckGuessValid(FString);
 
 
 private:
     // Set in Constructor
-    int MaxTries;
-    int CurrentTry;
+    int32 MaxTries;
+    int32 CurrentTry;
 };

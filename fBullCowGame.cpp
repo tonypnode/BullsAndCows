@@ -4,6 +4,8 @@
 #include "fBullCowGame.h"
 #include <iostream>
 
+using int32 = int;
+
 fBullCowGame::fBullCowGame() {
     Reset();
 }
@@ -14,8 +16,8 @@ void fBullCowGame::Reset() {
 }
 
 
-int fBullCowGame::GetMaxTries() const { return MaxTries; }
-int fBullCowGame::GetCurrentTry() const { return CurrentTry; }
+int32 fBullCowGame::GetMaxTries() const { return MaxTries; }
+int32 fBullCowGame::GetCurrentTry() const { return CurrentTry; }
 void fBullCowGame::IncrementCurrentTry() { CurrentTry += 1; }
 
 bool fBullCowGame::IsGameWon() {
