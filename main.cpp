@@ -6,14 +6,13 @@ std::string GetPlayerGuess();
 void DisplayGuess(std::string Guess);
 bool AskToPlayAgain();
 void ThankYouGoodBye();
-void PlayGame(int);
+void PlayGame();
 void PrintCurrentStats(int);
 
 
-fBullCowGame Game;
 
 int main() {
-    PlayGame(Game.GetMaxTries());
+    PlayGame();
     ThankYouGoodBye();
     return 0;
 }
@@ -43,10 +42,11 @@ void DisplayGuess(std::string Guess) {
 
 }
 
-void PlayGame(int GameLength){
+void PlayGame() {
     PrintIntro();
+    fBullCowGame Game;
     do {
-        for (int i = 0; i < GameLength; i++) {
+        for (int i = 0; i < Game.GetMaxTries(); i++) {
             PrintCurrentStats(i);
             std::string RoundGuess = GetPlayerGuess();
             DisplayGuess(RoundGuess);

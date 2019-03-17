@@ -4,8 +4,13 @@
 #include "fBullCowGame.h"
 #include <iostream>
 
+fBullCowGame::fBullCowGame() {
+    Reset();
+}
+
 void fBullCowGame::Reset() {
-    std::cout << "Reset";
+    MaxTries = 5;
+    CurrentTry = 1;
 }
 
 
@@ -15,6 +20,10 @@ int fBullCowGame::GetCurrentTry() const { return CurrentTry; }
 
 bool fBullCowGame::IsGameWon() {
     return true;
+}
+
+void PrintCurrentStats(int TryNumber){
+    std::cout << "Try " << TryNumber +1 << " of " << Game.GetMaxTries() << std::endl;
 }
 
 

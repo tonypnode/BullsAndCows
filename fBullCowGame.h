@@ -12,6 +12,7 @@
 
 class fBullCowGame {
 public:
+    fBullCowGame(); // Constructor
     int GetCurrentTry() const;
     int GetMaxTries() const;
     void Reset();
@@ -20,6 +21,7 @@ public:
 
 
 private:
-    int MaxTries = 5;
-    int CurrentTry = 0;
+    // Set in Constructor
+    int MaxTries;
+    int CurrentTry;
 };
