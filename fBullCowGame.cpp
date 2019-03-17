@@ -9,19 +9,16 @@ void fBullCowGame::Reset() {
 }
 
 
-int fBullCowGame::GetMaxTries() {
-    return MaxTries;
-}
+int fBullCowGame::GetMaxTries() const { return MaxTries; }
+int fBullCowGame::GetCurrentTry() const { return CurrentTry; }
 
 
 bool fBullCowGame::IsGameWon() {
-    std::cout << "IsGameWon";
     return true;
 }
 
 
 bool fBullCowGame::CheckGuessValid(std::string) {
-    std::cout << "CheckGuessValid";
     return true;
 }
 
