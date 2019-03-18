@@ -15,17 +15,14 @@ void fBullCowGame::Reset() {
     MyHiddenWord = HIDDEN_WORD;
     MaxTries = 5;
     CurrentTry = 1;
+    bIsGameWon = false;
 }
 
 
 int32 fBullCowGame::GetMaxTries() const { return MaxTries; }
 int32 fBullCowGame::GetCurrentTry() const { return CurrentTry; }
 int32 fBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
-
-
-bool fBullCowGame::IsGameWon() {
-    return true;
-}
+bool fBullCowGame::IsGameWon() { return bIsGameWon; }
 
 void fBullCowGame::PrintCurrentStats(){
     std::cout << "Try " << GetCurrentTry() << " of " << GetMaxTries() << std::endl;
@@ -65,13 +62,47 @@ fBullCowCount fBullCowGame::SubmitGuess(FString Guess) {
             }
         }
     }
+    if(BullCowCount.Bulls == GetHiddenWordLength()) {
+        bIsGameWon = true;
+    }
     return BullCowCount;
 }
 
 void fBullCowGame::PrintIntro() {
-    std::cout << "Welcome to Bulls and Cows.\n\n";
+    std::cout << "\n\nWelcome to Bulls and Cows.\n\n";
     std::cout << "Guess the " << GetHiddenWordLength() << " Letter isogram\n";
 
 }
 
+bool fBullCowGame::AskPlayAgain() {
+    std::cout << "Would You Like to Play Again y/n?\n";
+    FString Answer;
 
+    std::getline(std::cin, Answer);
+
+    if (Answer == "y") {
+        return true;
+
+    } else if (Answer == "n") {
+        std::cout << "Thank You For Playing My Game :)\n\n\nBye";
+        return false;
+
+    } else {
+        //TODO: Fix this, not restarting the PlayGame() loop after answering non 'y' or 'n' then answering 'y'.
+        AskPlayAgain();
+
+    }
+
+}
+
+bool fBullCowGame::PrintGameSummary() {
+    FString Message;
+
+    if(bIsGameWon) {
+        Message = "Yaaay, You be supr el smarto!\n\nYOU WON!!!\n\n";
+    } else {
+        Message = "Eeek, you didn't do so well. I recommend being smarter...\n\nJust sayin...\n\n";
+    }
+    std::cout << Message;
+    return AskPlayAgain();
+}

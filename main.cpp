@@ -26,16 +26,19 @@ fBullCowGame Game;
 void PlayGame() {
 
     Game.PrintIntro();
-    do {
-        Game.Reset();
-        for (int32 i = 0; i < Game.GetMaxTries(); i++) {
-            Game.PrintCurrentStats();
-            FText RoundGuess = GetPlayerGuess();
-            fBullCowCount BullCowCount = Game.SubmitGuess(RoundGuess);
-            std::cout << "Bulls = " << BullCowCount.Bulls << std::endl;
-            std::cout << "Cows = " << BullCowCount.Cows << std::endl;
-        }
-    } while (AskToPlayAgain());
+    Game.Reset();
+    //While game is not won and turns remaining, continue asking for guesses
+    while(!Game.IsGameWon() && Game.GetCurrentTry() <= Game.GetMaxTries()) {
+        Game.PrintCurrentStats();
+        FText RoundGuess = GetPlayerGuess();
+        fBullCowCount BullCowCount = Game.SubmitGuess(RoundGuess);
+        std::cout << "Bulls = " << BullCowCount.Bulls << std::endl;
+        std::cout << "Cows = " << BullCowCount.Cows << std::endl;
+    }
+
+    if (Game.PrintGameSummary() == true){
+        PlayGame();
+    };
 }
 
 FText GetPlayerGuess() {
@@ -65,31 +68,4 @@ FText GetPlayerGuess() {
 
     return Guess;
 
-}
-
-bool AskToPlayAgain() {
-    std::cout << "Would You Like to Play Again y/n?\n";
-    FText Answer;
-
-    std::getline(std::cin, Answer);
-
-
-    if(Answer == "y") {
-
-        return true;
-
-    } else if(Answer == "n") {
-        ThankYouGoodBye();
-
-        return false;
-
-    } else {
-        //TODO: Fix this, not restarting the PlayGame() loop after answering non 'y' or 'n' then answering 'y'.
-        AskToPlayAgain();
-
-    }
-}
-
-void ThankYouGoodBye(){
-    std::cout << "Thank You For Playing My Game :)\n\n\nBye";
 }

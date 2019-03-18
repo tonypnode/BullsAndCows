@@ -36,11 +36,16 @@ public:
     int32 GetMaxTries() const;
     int32 GetHiddenWordLength() const;
 
+    bool IsGameWon();
+    bool PrintGameSummary();
+
+
     void Reset();
     void PrintCurrentStats();
     void PrintIntro();
+    bool AskPlayAgain();
 
-    bool IsGameWon();
+
     EGuessStatus CheckGuessValid(FString);
 
     //Counts bulls and cows, assuming valid guess
@@ -50,5 +55,6 @@ private:
     // Set in Constructor
     int32 MaxTries;
     int32 CurrentTry;
+    int32 bIsGameWon;
     FString MyHiddenWord;
 };
