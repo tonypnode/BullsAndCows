@@ -59,5 +59,5 @@ private:
 
     FString MyHiddenWord;
 
-    bool IsIsogram(FString);
+    bool IsIsogram(FString) const;
 };

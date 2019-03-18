@@ -43,8 +43,14 @@ EGuessStatus fBullCowGame::CheckGuessValid(FString Guess) {
     }
 }
 
-bool fBullCowGame::IsIsogram(FString) {
-    return true;
+bool fBullCowGame::IsIsogram(FString) const {
+    bool result = true;
+    //treat 0 or 1 letter words are isograms
+    //for each word in the string
+        // if letter already in dictionary
+            // break out and return false
+        //else add the letter to the dictionary
+    return result;
 }
 
 
@@ -82,21 +88,23 @@ void fBullCowGame::PrintIntro() {
 
 bool fBullCowGame::AskPlayAgain() {
     std::cout << "Would You Like to Play Again y/n?\n";
+    bool result = false;
     FString Answer;
 
     std::getline(std::cin, Answer);
 
     if (Answer == "y") {
-        return true;
+        result = true;
 
     } else if (Answer == "n") {
         std::cout << "Thank You For Playing My Game :)\n\n\nBye";
-        return false;
+        result = false;
 
     } else {
         //TODO: Fix this, not restarting the PlayGame() loop after answering non 'y' or 'n' then answering 'y'.
         AskPlayAgain();
     }
+    return result;
 
 }
 
