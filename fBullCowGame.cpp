@@ -33,7 +33,6 @@ void fBullCowGame::PrintCurrentStats(){
 
 
 EGuessStatus fBullCowGame::CheckGuessValid(FString Guess) {
-    //If guess is NOT an isogram
     if(false){
         return EGuessStatus::Not_Isogram;
     } else if(false) {
@@ -41,7 +40,7 @@ EGuessStatus fBullCowGame::CheckGuessValid(FString Guess) {
     } else if(Guess.length() != GetHiddenWordLength()) {
         return EGuessStatus::Wrong_Length;
     } else {
-        return EGuessStatus::OK ;
+        return EGuessStatus::OK;
     }
 }
 
