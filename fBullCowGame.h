@@ -5,10 +5,10 @@
 
 #include <string>
 
-
-
 #ifndef BULLSANDCOWS_FBULLCOWGAME_H
+
 #define BULLSANDCOWS_FBULLCOWGAME_H
+
 #endif //BULLSANDCOWS_FBULLCOWGAME_H
 
 using int32 = int;
@@ -38,12 +38,12 @@ public:
 
     bool IsGameWon();
     bool PrintGameSummary();
+    bool AskPlayAgain();
 
 
     void Reset();
     void PrintCurrentStats();
     void PrintIntro();
-    bool AskPlayAgain();
 
 
     EGuessStatus CheckGuessValid(FString);
@@ -56,5 +56,8 @@ private:
     int32 MaxTries;
     int32 CurrentTry;
     int32 bIsGameWon;
+
     FString MyHiddenWord;
+
+    bool IsIsogram(FString);
 };

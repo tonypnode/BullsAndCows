@@ -3,6 +3,8 @@
 //
 #include "fBullCowGame.h"
 #include <iostream>
+#include <map>
+#define TMap std::map
 
 using int32 = int;
 
@@ -30,7 +32,7 @@ void fBullCowGame::PrintCurrentStats(){
 
 
 EGuessStatus fBullCowGame::CheckGuessValid(FString Guess) {
-    if(false){
+    if(! IsIsogram(Guess)){
         return EGuessStatus::Not_Isogram;
     } else if(false) {
         return EGuessStatus::Not_All_Lowercase;
@@ -39,6 +41,10 @@ EGuessStatus fBullCowGame::CheckGuessValid(FString Guess) {
     } else {
         return EGuessStatus::OK;
     }
+}
+
+bool fBullCowGame::IsIsogram(FString) {
+    return true;
 }
 
 
@@ -90,7 +96,6 @@ bool fBullCowGame::AskPlayAgain() {
     } else {
         //TODO: Fix this, not restarting the PlayGame() loop after answering non 'y' or 'n' then answering 'y'.
         AskPlayAgain();
-
     }
 
 }
@@ -99,10 +104,10 @@ bool fBullCowGame::PrintGameSummary() {
     FString Message;
 
     if(bIsGameWon) {
-        Message = "Yaaay, You be supr el smarto!\n\nYOU WON!!!\n\n";
+        Message = "Yaaay, You be supr el smarto!\n\nYOU WON!!!";
     } else {
-        Message = "Eeek, you didn't do so well. I recommend being smarter...\n\nJust sayin...\n\n";
+        Message = "Eeek, you didn't do so well. I recommend being smarter...\n\nJust sayin...";
     }
-    std::cout << Message;
+    std::cout << "\n\n" << Message << "\n\n";
     return AskPlayAgain();
 }

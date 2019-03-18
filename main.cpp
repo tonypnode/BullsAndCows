@@ -51,7 +51,7 @@ FText GetPlayerGuess() {
         GuessCheck = Game.CheckGuessValid(Guess);
         switch (GuessCheck) {
             case EGuessStatus::Wrong_Length:
-                std::cout << "Please enter a " << Game.GetHiddenWordLength() << " word, this isn't going well for you\n\n";
+                std::cout << "Please enter a " << Game.GetHiddenWordLength() << " letter word, this isn't going well for you\n\n";
                 break;
             case EGuessStatus::Not_Isogram:
                 std::cout << "You didn't enter an isogram.... RTFM brohiem, here you go... http://lmgtfy.com/?q=what+is+an+isogram\n\n";
