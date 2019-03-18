@@ -11,7 +11,6 @@ For game logic see the fBullCowGame class.
 using FText = std::string;
 using int32 = int;
 
-void PrintIntro();
 FText GetPlayerGuess();
 bool AskToPlayAgain();
 void ThankYouGoodBye();
@@ -22,27 +21,11 @@ int32 main() {
     return 0;
 }
 
-void PrintIntro() {
-   constexpr int32 WORD_LENGTH = 5;
-
-   std::cout << "Welcome to Bulls and Cows.\n\n";
-   std::cout << "Guess the " << WORD_LENGTH << " Letter isogram\n";
-
-}
-
-FText GetPlayerGuess() {
-   FText Guess;
-
-   std::cout << "Enter Guess: \n";
-   std::getline(std::cin, Guess);
-
-   return Guess;
-
-}
+fBullCowGame Game;
 
 void PlayGame() {
-    PrintIntro();
-    fBullCowGame Game;
+
+    Game.PrintIntro();
     do {
         Game.Reset();
         for (int32 i = 0; i < Game.GetMaxTries(); i++) {
@@ -53,6 +36,34 @@ void PlayGame() {
             std::cout << "Cows = " << BullCowCount.Cows << std::endl;
         }
     } while (AskToPlayAgain());
+}
+
+FText GetPlayerGuess() {
+    FText Guess;
+    EGuessStatus GuessCheck = EGuessStatus::Invalid_Status;
+    do {
+        std::cout << "Enter Guess: \n";
+        std::getline(std::cin, Guess);
+
+        EGuessStatus GuessCheck = Game.CheckGuessValid(Guess);
+        switch (GuessCheck) {
+            case EGuessStatus::Wrong_Length:
+                std::cout << "Please enter a " << Game.GetHiddenWordLength()
+                          << " word, this isn't going well for you\n\n";
+                break;
+            case EGuessStatus::Not_Isogram:
+                std::cout
+                        << "You didn't enter an isogram.... RTFM brohiem, here you go... http://lmgtfy.com/?q=what+is+an+isogram\n\n";
+                break;
+            case EGuessStatus::Not_All_Lowercase:
+                std::cout
+                        << "Yea, this one is totally on me. This isn't python or go, make your guess all lower case isn't that easy, so do it for me for now...\n\n";
+                break;
+            default:
+                GuessCheck = EGuessStatus::OK;
+                return Guess;
+        }
+    } while(GuessCheck != EGuessStatus::OK);
 }
 
 bool AskToPlayAgain() {

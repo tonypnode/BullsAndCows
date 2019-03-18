@@ -14,10 +14,18 @@
 using int32 = int;
 using FString = std::string;
 
-struct fBullCowCount
-{
+struct fBullCowCount {
     int32 Bulls = 0;
     int32 Cows = 0;
+};
+
+enum class EGuessStatus {
+    Invalid_Status,
+    OK,
+    Not_Isogram,
+    Wrong_Length,
+    Not_All_Lowercase,
+
 };
 
 class fBullCowGame {
@@ -26,12 +34,14 @@ public:
 
     int32 GetCurrentTry() const;
     int32 GetMaxTries() const;
+    int32 GetHiddenWordLength() const;
 
     void Reset();
     void PrintCurrentStats();
+    void PrintIntro();
 
     bool IsGameWon();
-    bool CheckGuessValid(FString);
+    EGuessStatus CheckGuessValid(FString);
 
     //Counts bulls and cows, assuming valid guess
     fBullCowCount SubmitGuess(FString);

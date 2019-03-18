@@ -11,7 +11,7 @@ fBullCowGame::fBullCowGame() {
 }
 
 void fBullCowGame::Reset() {
-    const FString HIDDEN_WORD = "ant";
+    const FString HIDDEN_WORD = "planet";
     MyHiddenWord = HIDDEN_WORD;
     MaxTries = 5;
     CurrentTry = 1;
@@ -20,6 +20,8 @@ void fBullCowGame::Reset() {
 
 int32 fBullCowGame::GetMaxTries() const { return MaxTries; }
 int32 fBullCowGame::GetCurrentTry() const { return CurrentTry; }
+int32 fBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
+
 
 bool fBullCowGame::IsGameWon() {
     return true;
@@ -30,9 +32,20 @@ void fBullCowGame::PrintCurrentStats(){
 }
 
 
-bool fBullCowGame::CheckGuessValid(std::string) {
-    return true;
+EGuessStatus fBullCowGame::CheckGuessValid(FString Guess) {
+    //If guess is NOT an isogram
+    if(false){
+        return EGuessStatus::Not_Isogram;
+    } else if(false) {
+        return EGuessStatus::Not_All_Lowercase;
+    } else if(Guess.length() != GetHiddenWordLength()) {
+        return EGuessStatus::Wrong_Length;
+    } else {
+        return EGuessStatus::OK ;
+    }
 }
+
+
 
 //Assumes valid guess, returns count
 fBullCowCount fBullCowGame::SubmitGuess(FString Guess) {
@@ -41,7 +54,7 @@ fBullCowCount fBullCowGame::SubmitGuess(FString Guess) {
 
     // setup return var
     fBullCowCount BullCowCount;
-    int32 HiddenWordLength = MyHiddenWord.length();
+    int32 HiddenWordLength = GetHiddenWordLength();
     for (int32 i = 0; i < HiddenWordLength; i++ ) {
         for (int32 ii = 0; ii < HiddenWordLength; ii++) {
             if(MyHiddenWord[i] == Guess[ii]) {
@@ -54,6 +67,12 @@ fBullCowCount fBullCowGame::SubmitGuess(FString Guess) {
         }
     }
     return BullCowCount;
+}
+
+void fBullCowGame::PrintIntro() {
+    std::cout << "Welcome to Bulls and Cows.\n\n";
+    std::cout << "Guess the " << GetHiddenWordLength() << " Letter isogram\n";
+
 }
 
 
